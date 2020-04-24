@@ -59,7 +59,7 @@ void tick_count(){
   }else{
     encoderp--;
   }
-  void button()
+  void button(){
   s_pull = 1;
 }
 
@@ -70,16 +70,15 @@ void tick_count(){
 // 5/1024 cnverts what that pin reads to voltage we can read
 float current(int val){
   return val*5.0/1024.0;
+}
 
- void convert_current(int val)
-  val*5.0/1024.0;
  } 
  
 
 
 
 
-void setup() 
+void setup(){
   
   // put your setup code here, to run once:
 // set pins as outputs
@@ -99,7 +98,7 @@ attachInterrupt(digitalPinToInterrupt(2), button , RISING);
 Serial.begin(9600);
 }
 
-void loop() 
+void loop(){
 
  // read current sensor and wait for the flag, 
  //flag goes off:
@@ -146,7 +145,7 @@ if(button_pressed){
  }
 }
 
-void tick_count()
+void tick_count(){
   if(digitalRead(CoderB) == 1){
     encoderp++;
   }else{
@@ -154,6 +153,6 @@ void tick_count()
   }
 }
 
-void button()
+void button(){
   s_pull = 1;
 }
