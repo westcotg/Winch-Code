@@ -24,7 +24,7 @@ int current_sensed = 0; // not constant
 
 float current = 0;
 
-s_pull=0;
+int s_pull=0;
 
 const int button = 3;
 
