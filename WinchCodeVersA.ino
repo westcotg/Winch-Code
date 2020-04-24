@@ -28,6 +28,10 @@ int s_pull=0;
 
 const int wbutt = 3;
 
+int wpull= 0;
+
+int rwinch= 0;
+
 //this function stops sending power to pins to reverse direction
 void blank(){
   digitalWrite(M1IN1, LOW);
@@ -99,18 +103,18 @@ Serial.println(current);
 
 if(button_pressed){
 
-  if(s-pull){
+  if(s_pull){
     s_time= millis();
     s_pull = 0;
-    w_pull = 1;
-  }else if(w_pull){
+    wpull = 1;
+  }else if(wpull){
     w_pull(wspeed);
 
     timer = millis();
     if(timer-s_time >=5000){
     s_time = millis();
     w_stop();
-    w_pull = 0;
+    wpull = 0;
     wait_winch =1;  
     
     }
@@ -118,15 +122,15 @@ if(button_pressed){
     timer = millis();
     if(timer-s_time >= 5000){
       wait_winch = 0;
-      r_winch = 1;
+      rwinch = 1;
       
     }
   }else if(r_winch){
-    r_winch();
+    rwinch();
 
     if (encoderp <= 0){
       w_stop();
-      r_winch = 0;
+      rwinch = 0;
     }
   }
  }
