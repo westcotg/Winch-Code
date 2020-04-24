@@ -8,7 +8,7 @@
 const int M2D1PWM = 6;
 const int M2D2PWM = 5;
 const int M2IN1 = 9;
-const int M2IN2 = 11;
+const int M2IN2 = 11:
 const int M1IN1 = 8;
 const int M1IN2 = 10;
 const int CoderA = 3;
@@ -26,7 +26,7 @@ float current = 0;
 
 int s_pull=0;
 
-const int button = 3;
+const int wbutt = 3;
 
 //this function stops sending power to pins to reverse direction
 void blank(){
@@ -80,7 +80,7 @@ pinMode(CoderA, INPUT_PULLUP);
 pinMode(CoderB, INPUT_PULLUP);
 
 attachInterrupt(digitalPinToInterrupt(3), encoderp, RISING);
-attachInterrupt(digitalPinToInterrupt(2), button , RISING);
+attachInterrupt(digitalPinToInterrupt(2), tick_count , RISING);
 
 Serial.begin(9600);
 }
@@ -153,51 +153,3 @@ void button(){
 
 
 
-
-/Users/garthwestcott/Documents/Arduino/WinchCodeVersA/WinchCodeVersA.ino: In function 'void tick_count()':
-WinchCodeVersA:63:3: error: expected initializer before 's_pull'
-   s_pull = 1;
-   ^~~~~~
-/Users/garthwestcott/Documents/Arduino/WinchCodeVersA/WinchCodeVersA.ino: In function 'float current(int)':
-WinchCodeVersA:75:3: error: expected initializer before 'val'
-   val*5.0/1024.0;
-   ^~~
-/Users/garthwestcott/Documents/Arduino/WinchCodeVersA/WinchCodeVersA.ino: At global scope:
-WinchCodeVersA:86:1: error: expected initializer before 'pinMode'
- pinMode(M2D1PWM, OUTPUT);
- ^~~~~~~
-WinchCodeVersA:87:8: error: expected constructor, destructor, or type conversion before '(' token
- pinMode(M2D2PWM, OUTPUT);
-        ^
-WinchCodeVersA:88:8: error: expected constructor, destructor, or type conversion before '(' token
- pinMode(M2IN1, OUTPUT);
-        ^
-WinchCodeVersA:89:8: error: expected constructor, destructor, or type conversion before '(' token
- pinMode(M2IN2, OUTPUT);
-        ^
-WinchCodeVersA:90:8: error: expected constructor, destructor, or type conversion before '(' token
- pinMode(M1IN1, OUTPUT);
-        ^
-WinchCodeVersA:91:8: error: expected constructor, destructor, or type conversion before '(' token
- pinMode(M1IN2, OUTPUT);
-        ^
-WinchCodeVersA:93:8: error: expected constructor, destructor, or type conversion before '(' token
- pinMode(CoderA, INPUT_PULLUP);
-        ^
-WinchCodeVersA:94:8: error: expected constructor, destructor, or type conversion before '(' token
- pinMode(CoderB, INPUT_PULLUP);
-        ^
-WinchCodeVersA:96:16: error: expected constructor, destructor, or type conversion before '(' token
- attachInterrupt(digitalPinToInterrupt(3), encoderp, RISING);
-                ^
-WinchCodeVersA:97:16: error: expected constructor, destructor, or type conversion before '(' token
- attachInterrupt(digitalPinToInterrupt(2), button , RISING);
-                ^
-WinchCodeVersA:99:1: error: 'Serial' does not name a type
- Serial.begin(9600);
- ^~~~~~
-WinchCodeVersA:100:1: error: expected declaration before '}' token
- }
- ^
-exit status 1
-expected initializer before 's_pull'
