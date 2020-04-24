@@ -49,7 +49,7 @@ void backward(){
 
 void w_pull(int speed){
   forward();
-  analogWrite(M2D2PWM, wspeed);
+  analogWrite(M2D2PWM, speed);
 }
 
 void w_stop(){
@@ -104,7 +104,7 @@ if(button_pressed){
     s_pull = 0;
     w_pull = 1;
   }else if(w_pull){
-    w_pull();
+    w_pull(wspeed);
 
     timer = millis();
     if(timer-s_time >=5000){
