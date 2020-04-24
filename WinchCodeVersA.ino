@@ -57,17 +57,6 @@ void w_stop(){
   analogWrite(M2D2PWM, 0);
 }
 
-void tick_count(){
-  if(digitalRead(CoderB) == 1){
-    encoderp++;
-  }else{
-    encoderp--;
-  }
-  void button(){
-  s_pull = 1;
-}
-
-
 
 //My aruduino is 10-bit, resolution of ADC is 1024,system voltage is 
 //5V, val is the analog value read by the pin. Multiplying the read value by 
