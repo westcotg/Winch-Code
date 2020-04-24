@@ -4,6 +4,7 @@
 
 
 //calling pins
+
 const int M2D1PWM = 6;
 const int M2D2PWM = 5;
 const int M2IN1 = 9;
@@ -20,7 +21,10 @@ volatile long encoderp = 0;
 const int wspeed = 100;
 
 int current_sensed = 0; // not constant
-//float current = 0;
+
+float current = 0;
+
+s_pull=0;
 
 const int button = 3;
 
@@ -68,15 +72,9 @@ void tick_count(){
 //My aruduino is 10-bit, resolution of ADC is 1024,system voltage is 
 //5V, val is the analog value read by the pin. Multiplying the read value by 
 // 5/1024 cnverts what that pin reads to voltage we can read
-float current(int val){
+float convert_current(int val){
   return val*5.0/1024.0;
 }
-
- } 
- 
-
-
-
 
 void setup(){
   
