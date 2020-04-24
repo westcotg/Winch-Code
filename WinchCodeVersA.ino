@@ -8,13 +8,17 @@
 const int M2D1PWM = 6;
 const int M2D2PWM = 5;
 const int M2IN1 = 9;
-const int M2IN2 = 11:
+const int M2IN2 = 11;
 const int M1IN1 = 8;
 const int M1IN2 = 10;
 const int CoderA = 3;
 const int CoderB = 2;
 const int current_pin = A0;
 
+//Call in variables
+long stime = 0;
+
+long timer = 0;
 
 volatile long encoderp = 0;
 
@@ -33,41 +37,41 @@ int wpull= 0;
 int rwinch= 0;
 
 //this function stops sending power to pins to reverse direction
-void blank(){
-  digitalWrite(M1IN1, LOW);
-  digitalWrite(M1IN2, LOW);
-}
+//void blank(){
+  //digitalWrite(M1IN1, LOW);
+  //digitalWrite(M1IN2, LOW);
+//}
 
-void forward(){
-  blank();
+//void forward(){
+  //blank();
   //Having both HIGH will burn out adruino
-  digitalWrite(M1IN1, HIGH);
-  digitalWrite(M2IN2, LOW);
-}
+  //digitalWrite(M1IN1, HIGH);
+  //digitalWrite(M2IN2, LOW);
+//}
 
-void backward(){
-  blank();
-  digitalWrite(M1IN1, LOW);
-  digitalWrite(M1IN2, HIGH);
-}
+//void backward(){
+  //blank();
+  //digitalWrite(M1IN1, LOW);
+  //digitalWrite(M1IN2, HIGH);
+//}
 
-void w_pull(int speed){
-  forward();
-  analogWrite(M2D2PWM, speed);
-}
+//void w_pull(int speed){
+  //forward();
+  //analogWrite(M2D2PWM, speed);
+//}
 
-void w_stop(){
-  blank();
-  analogWrite(M2D2PWM, 0);
-}
+//void w_stop(){
+  //blank();
+  //analogWrite(M2D2PWM, 0);
+//}
 
 
 //My aruduino is 10-bit, resolution of ADC is 1024,system voltage is 
 //5V, val is the analog value read by the pin. Multiplying the read value by 
 // 5/1024 cnverts what that pin reads to voltage we can read
-float convert_current(int val){
-  return val*5.0/1024.0;
-}
+//float convert_current(int val){
+  //return val*5.0/1024.0;
+//}
 
 void setup(){
   
@@ -104,15 +108,15 @@ Serial.println(current);
 if(button_pressed){
 
   if(s_pull){
-    s_time= millis();
+    stime= millis();
     s_pull = 0;
     wpull = 1;
   }else if(wpull){
     w_pull(wspeed);
 
     timer = millis();
-    if(timer-s_time >=5000){
-    s_time = millis();
+    if(timer-stime >=5000){
+    stime = millis();
     w_stop();
     wpull = 0;
     wait_winch =1;  
@@ -120,13 +124,13 @@ if(button_pressed){
     }
   }else if(wait_winch){
     timer = millis();
-    if(timer-s_time >= 5000){
+    if(timer-stime >= 5000){
       wait_winch = 0;
       rwinch = 1;
       
     }
-  }else if(r_winch){
-    rwinch();
+  }else if(rwinch){
+    r_winch();
 
     if (encoderp <= 0){
       w_stop();
@@ -148,6 +152,43 @@ void button(){
   s_pull = 1;
 }
 
+
+
+void blank(){
+  digitalWrite(M1IN1, LOW);
+  digitalWrite(M1IN2, LOW);
+}
+
+void forward(){
+  blank();
+  //Having both HIGH will burn out adruino
+  digitalWrite(M1IN1, HIGH);
+  digitalWrite(M2IN2, LOW);
+}
+
+void backward(){
+  blank();
+  digitalWrite(M1IN1, LOW);
+  digitalWrite(M1IN2, HIGH);
+}
+
+void w_pull(int speed){
+  forward();
+  analogWrite(M2D2PWM, speed);
+}
+
+void w_stop(){
+  blank();
+  analogWrite(M2D2PWM, 0);
+}
+
+
+//My aruduino is 10-bit, resolution of ADC is 1024,system voltage is 
+//5V, val is the analog value read by the pin. Multiplying the read value by 
+// 5/1024 cnverts what that pin reads to voltage we can read
+float convert_current(int val){
+  return val*5.0/1024.0;
+}
 
 //Error
 
