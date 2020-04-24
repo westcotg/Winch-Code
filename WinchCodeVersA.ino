@@ -79,8 +79,8 @@ pinMode(M1IN2, OUTPUT);
 pinMode(CoderA, INPUT_PULLUP);
 pinMode(CoderB, INPUT_PULLUP);
 
-attachInterrupt(digitalPinToInterrupt(3), encoderp, RISING);
-attachInterrupt(digitalPinToInterrupt(2), tick_count , RISING);
+attachInterrupt(digitalPinToInterrupt(3), tick_count, RISING);
+attachInterrupt(digitalPinToInterrupt(2), button , RISING);
 
 Serial.begin(9600);
 }
