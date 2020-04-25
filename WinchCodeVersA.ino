@@ -1,4 +1,7 @@
 
+
+  
+
 // Make winch pull at constant force, measure current then unwind the winch
 
 
@@ -35,6 +38,13 @@ const int wbutt = 3;
 int wpull= 0;
 
 int rwinch= 0;
+
+int button_pressed= 0;
+
+int wait_winch= 0;
+
+int reverse_winch = 0;
+
 
 //this function stops sending power to pins to reverse direction
 //void blank(){
@@ -130,7 +140,7 @@ if(button_pressed){
       
     }
   }else if(rwinch){
-    r_winch();
+    reverse_winch()
 
     if (encoderp <= 0){
       w_stop();
@@ -189,9 +199,6 @@ void w_stop(){
 float convert_current(int val){
   return val*5.0/1024.0;
 }
-
-//Error
-
 
 
 
